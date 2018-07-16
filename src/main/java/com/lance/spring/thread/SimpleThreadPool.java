@@ -17,7 +17,7 @@ public class SimpleThreadPool {
 
         for (int i = 0; i < 10; i++) {
             Runnable task = new TaskThread("" + i);
-            //将每个任务放到线程池
+            //将每个任务放到线程池, 放进去之后就会执行
             executorService.execute(task);
         }
 
@@ -25,11 +25,11 @@ public class SimpleThreadPool {
 
         //executorService.shutdown();
         try {
-            executorService.awaitTermination(20, TimeUnit.SECONDS);
+            executorService.awaitTermination(20, TimeUnit.MINUTES);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        executorService.shutdown();
+        //executorService.shutdown();
         System.out.println("main after executeservice shutdown");
 
         while (!executorService.isTerminated()) {
